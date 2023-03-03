@@ -1,7 +1,10 @@
-import dotenv from 'dotenv'
+const dotenv = require('dotenv')
 const express = require('express')
-import connectDB from './config/db'
 const { graphqlHTTP } = require('express-graphql')
+
+require('./models/index')
+const schema = require('./schema/schema')
+const connectDB = require('./config/db')
 
 dotenv.config()
 connectDB()
