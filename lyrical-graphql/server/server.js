@@ -1,5 +1,6 @@
 const dotenv = require('dotenv')
 const express = require('express')
+const cors = require('cors')
 const { graphqlHTTP } = require('express-graphql')
 
 require('./models/index')
@@ -11,6 +12,7 @@ connectDB()
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
   return res.send("Lyrical")
