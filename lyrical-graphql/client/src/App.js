@@ -1,6 +1,15 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Song from './components/Song';
+import SongList from './components/SongList';
+
 function App() {
   return (
-    <h2>Lyrical Client App</h2>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<SongList />} />
+        <Route path='/songs/:id' element={<Song />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
