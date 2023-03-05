@@ -17,9 +17,15 @@ code {
 @tailwind utilities;
 
 nav a {
-  @apply text-gray-600 border-b pb-1 hover:text-black hover:border-gray-900;
+  @apply text-gray-600 border-b pb-1 hover:text-black hover:border-gray-900 transition-all;
 }
 
 nav a.active {
   color: black;
+}
+
+section.songs-list {
+  .header a {
+    @apply bg-indigo-600 hover:bg-indigo-700 transition-all rounded px-6 py-2.5 text-white text-sm font-semibold;
+  }
 }

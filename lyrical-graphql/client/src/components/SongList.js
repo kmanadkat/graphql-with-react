@@ -1,5 +1,6 @@
 import React from 'react'
 import { useQuery, gql } from '@apollo/client'
+import { Link } from 'react-router-dom'
 
 const GET_SONGS = gql`
   query {
@@ -29,8 +30,11 @@ const SongList = () => {
   }
 
   return (
-    <section className='w-3/4 mx-auto mt-12'>
-      <h2 className='text-xl font-medium mb-6'>Songs List</h2>
+    <section className='songs-list w-3/4 mx-auto'>
+      <div className="header mb-6 flex items-center justify-between">
+        <h2 className='text-2xl font-medium'>Songs List</h2>
+        <Link role="button" to="/songs/create">Create Song</Link>
+      </div>
       <ul className='list-none mx-auto'>
         {renderSongs()}
       </ul>
