@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+nav a {
+  @apply text-gray-600 border-b pb-1 hover:text-black hover:border-gray-900;
+}
+
+nav a.active {
+  color: black;
+}

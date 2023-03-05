@@ -13,7 +13,9 @@ const SongList = () => {
   // graphQL data => JSX
   const renderSongs = () => {
     if (data && Array.isArray(data.songs)) {
-      return <>{data.songs.map(song => <li key={song.id}>{song.title}</li>)}</>
+      return <>{data.songs.map(song => (
+        <li key={song.id} className="px-8 py-3 border my-2">{song.title}</li>
+      ))}</>
     }
   }
 
@@ -27,9 +29,12 @@ const SongList = () => {
   }
 
   return (
-    <ul>
-      {renderSongs()}
-    </ul>
+    <section className='w-3/4 mx-auto mt-12'>
+      <h2 className='text-xl font-medium mb-6'>Songs List</h2>
+      <ul className='list-none mx-auto'>
+        {renderSongs()}
+      </ul>
+    </section>
   )
 }
 
