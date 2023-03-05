@@ -24,8 +24,10 @@ nav a.active {
   color: black;
 }
 
-section.songs-list {
-  .header a {
-    @apply bg-indigo-600 hover:bg-indigo-700 transition-all rounded px-6 py-2.5 text-white text-sm font-semibold;
-  }
+.primary-button {
+  @apply bg-indigo-600 hover:bg-indigo-700 transition-all rounded px-6 py-2.5 text-white text-sm font-semibold;
+}
+
+.primary-input {
+  @apply w-1/4 border px-2 py-1.5 rounded focus:outline-indigo-400;
 }

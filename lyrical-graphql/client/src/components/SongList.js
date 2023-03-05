@@ -33,7 +33,7 @@ const SongList = () => {
     <section className='songs-list w-3/4 mx-auto'>
       <div className="header mb-6 flex items-center justify-between">
         <h2 className='text-2xl font-medium'>Songs List</h2>
-        <Link role="button" to="/songs/create">Create Song</Link>
+        <Link className='primary-button' role="button" to="/songs/create">Create Song</Link>
       </div>
       <ul className='list-none mx-auto'>
         {renderSongs()}
