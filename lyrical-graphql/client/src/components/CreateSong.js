@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
+import { useNavigate } from 'react-router-dom'
+import GET_SONGS from '../queries/fetchSongs'
+import ADD_SONG_MUTATION from '../queries/addSong'
 
-const ADD_SONG_MUTATION = gql`
-  mutation AddSong($songTitle: String){
-    addSong(title: $songTitle) {
-      id,
-      title
-    }
-  }
-`
 
 const CreateSong = () => {
+  const navigate = useNavigate();
   const [songName, setSongName] = useState('')
   const [execute, { loading }] = useMutation(ADD_SONG_MUTATION)
 
@@ -21,9 +17,13 @@ const CreateSong = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    execute({ variables: { songTitle: songName } }).then(data => {
+    execute({
+      variables: { songTitle: songName },
+      refetchQueries: [{ query: GET_SONGS }],
+    }).then(data => {
       console.log(data)
       setSongName('')
+      navigate('/')
     })
   }
 
