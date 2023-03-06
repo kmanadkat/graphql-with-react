@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
+import SongItem from './SongItem'
 import GET_SONGS from '../queries/fetchSongs'
 
 const SongList = () => {
@@ -9,9 +10,9 @@ const SongList = () => {
   // graphQL data => JSX
   const renderSongs = () => {
     if (data && Array.isArray(data.songs)) {
-      return <>{data.songs.map(song => (
-        <li key={song.id} className="px-8 py-3 border my-2">{song.title}</li>
-      ))}</>
+      return data.songs.map(song => (
+        <SongItem key={song.id} title={song.title} />
+      ))
     }
   }
 

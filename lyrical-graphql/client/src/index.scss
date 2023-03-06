@@ -24,6 +24,14 @@ nav a.active {
   color: black;
 }
 
+.song-item {
+  @apply px-8 py-3 border my-2 flex justify-between;
+
+  button {
+    @apply text-xs font-semibold text-red-700 hover:bg-red-50 transition px-3 py-1 rounded;
+  }
+}
+
 .primary-button {
   @apply bg-indigo-600 hover:bg-indigo-700 transition-all rounded px-6 py-2.5 text-white text-sm font-semibold;
 

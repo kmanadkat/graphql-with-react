@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import SongList from './components/SongList';
 import CreateSong from './components/CreateSong';
-import Song from './components/Song';
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
       <Routes>
         <Route path='/' element={<SongList />} />
         <Route path='/songs/create' element={<CreateSong />} />
-        <Route path='/songs/:id' element={<Song />} />
       </Routes>
     </BrowserRouter>
   );
