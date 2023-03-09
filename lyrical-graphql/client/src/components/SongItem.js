@@ -1,11 +1,14 @@
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 
 const SongItem = ({ title, songId, handleDelete }) => {
   return (
-    <li className="song-item">
-      <span>{title}</span>
-      <button onClick={() => handleDelete(songId)}>Delete</button>
-    </li>
+    <Link to={`/songs/${songId}`}>
+      <li className="song-item hover:bg-gray-50 transition">
+        <span>{title}</span>
+        <button onClick={() => handleDelete(songId)}>Delete</button>
+      </li>
+    </Link>
   )
 }
 
