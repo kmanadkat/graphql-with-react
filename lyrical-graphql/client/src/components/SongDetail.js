@@ -30,7 +30,7 @@ const SongDetail = () => {
         {renderLyrics()}
       </ul>
       <hr className='mb-6 mt-20' />
-      <CreateLyric />
+      <CreateLyric songId={id} />
     </section>
   )
 }
