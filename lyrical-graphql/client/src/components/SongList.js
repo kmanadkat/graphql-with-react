@@ -27,7 +27,7 @@ const SongList = () => {
   }
 
   // Loading
-  if (loading) return <p>Loading...</p>
+  if (loading) return <p className='w-3/4 mx-auto'>Loading...</p>
 
   // Error Handling
   if (error) {
