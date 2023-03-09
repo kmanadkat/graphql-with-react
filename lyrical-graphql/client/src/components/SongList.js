@@ -1,17 +1,27 @@
 import React from 'react'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import SongItem from './SongItem'
 import GET_SONGS from '../queries/fetchSongs'
+import DELETE_SONG_MUTATION from '../queries/deleteSong'
 
 const SongList = () => {
-  const { loading, error, data } = useQuery(GET_SONGS)
+  const { loading, error, data, refetch } = useQuery(GET_SONGS)
+  const [exec] = useMutation(DELETE_SONG_MUTATION)
+
+  const handleDelete = (songId) => {
+    exec({ variables: { songId } }).then(() => refetch())
+  }
 
   // graphQL data => JSX
   const renderSongs = () => {
     if (data && Array.isArray(data.songs)) {
       return data.songs.map(song => (
-        <SongItem key={song.id} title={song.title} />
+        <SongItem
+          key={song.id}
+          songId={song.id}
+          title={song.title}
+          handleDelete={handleDelete} />
       ))
     }
   }

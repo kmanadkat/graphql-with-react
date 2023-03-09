@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
 
-const SongItem = ({ title, songId }) => {
+const SongItem = ({ title, songId, handleDelete }) => {
   return (
     <li className="song-item">
       <span>{title}</span>
-      <button>Delete</button>
+      <button onClick={() => handleDelete(songId)}>Delete</button>
     </li>
   )
 }
