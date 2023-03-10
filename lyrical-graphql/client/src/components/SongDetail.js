@@ -16,8 +16,18 @@ const SongDetail = () => {
 
   const { title, lyrics } = _get(data, 'song', {})
 
-  const handleLike = (lyricId) => {
-    exec({ variables: { lyricId } })
+  const handleLike = (lyricId, likes) => {
+    exec({
+      variables: { lyricId },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        likeLyric: {
+          id: lyricId,
+          __typename: 'LyricType',
+          likes: likes + 1
+        }
+      }
+    })
   }
 
   // graphQL data => JSX

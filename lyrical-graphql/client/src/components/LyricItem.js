@@ -5,7 +5,7 @@ const LyricItem = ({ id, content, likes, handleLike }) => {
     <li className='list-item'>
       <span>{content}</span>
       <div className='likes-wrapper'>
-        <button className='primary' onClick={() => handleLike(id)}>Like</button>
+        <button className='primary' onClick={() => handleLike(id, likes)}>Like</button>
         <span>{likes}</span>
       </div>
     </li>
