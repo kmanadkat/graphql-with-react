@@ -1,24 +1,30 @@
 import React from 'react'
 import _get from 'lodash/get'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { useParams } from 'react-router-dom'
 import CreateLyric from './CreateLyric'
 import GET_SONG_BY_ID from '../queries/fetchSong'
 import LyricItem from './LyricItem'
+import LIKE_LYRIC from '../queries/likeLyric'
 
 const SongDetail = () => {
   const { id } = useParams()
   const { data, loading } = useQuery(GET_SONG_BY_ID, { variables: { songId: id } })
+  const [exec] = useMutation(LIKE_LYRIC)
 
   if (loading) return <p className='w-3/4 mx-auto'>Loading...</p>
 
   const { title, lyrics } = _get(data, 'song', {})
 
+  const handleLike = (lyricId) => {
+    exec({ variables: { lyricId } })
+  }
+
   // graphQL data => JSX
   const renderLyrics = () => {
     if (lyrics && Array.isArray(lyrics)) {
       return lyrics.map(lyric => (
-        <LyricItem key={lyric.id} {...lyric} />
+        <LyricItem key={lyric.id} {...lyric} handleLike={handleLike} />
       ))
     }
   }

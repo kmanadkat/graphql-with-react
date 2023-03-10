@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import ADD_LYRIC from '../queries/addLyric'
 
 const CreateLyric = ({ songId }) => {
@@ -35,4 +35,4 @@ const CreateLyric = ({ songId }) => {
   )
 }
 
-export default CreateLyric
+export default memo(CreateLyric)
