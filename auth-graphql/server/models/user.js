@@ -23,7 +23,8 @@ UserSchema.pre('save', async function (next) {
     }
 
     // Generate a salt & hash the password
-    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS)
+    const saltRounds = parseInt(process.env.SALT_ROUNDS)
+    const salt = await bcrypt.genSalt(saltRounds)
     const hashedPassword = await bcrypt.hash(this.password, salt)
 
     // Replace the plaintext password with the hashed password
