@@ -16,23 +16,26 @@ passport.deserializeUser((id, done) => {
 })
 
 passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-  User.findOne({ email: email.toLowerCase() }, (err, user) => {
-    if (err)
-      return done(err);
+  User.findOne({ email: email.toLowerCase() })
+    .exec()
+    .then(user => {
+      if (!user)
+        return done(null, false, 'Invalid Credentials')
 
-    if (!user)
-      return done(null, false, 'Invalid Credentials')
+      user.comparePassword(password, (err, isMatch) => {
+        if (err)
+          return done(err)
 
-    user.comparePassword(password, (err, isMatch) => {
-      if (err)
-        return done(err)
+        if (isMatch)
+          return done(null, user)
 
-      if (isMatch)
-        return done(null, user)
-
-      return done(null, false, 'Invalid Credentials.')
+        return done(null, false, 'Invalid Credentials.')
+      })
     })
-  })
+    .catch(err => {
+      if (err)
+        return done(err);
+    })
 }))
 
 
