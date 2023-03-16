@@ -10,7 +10,8 @@ const client = new ApolloClient({
   uri: 'http://localhost:8000/graphql',
   cache: new InMemoryCache({
     dataIdFromObject: (obj) => obj.id
-  })
+  }),
+  credentials: 'include'
 });
 
 root.render(
