@@ -1,15 +1,6 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
 
-const LandingPage = ({ loading, authenticated }) => {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (authenticated) {
-      navigate('/dashboard')
-    }
-  }, [authenticated, navigate])
-
+const LandingPage = ({ loading }) => {
   return (
     <div>
       <p className="text-xl font-semibold">

@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import _get from "lodash/get";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import EnsureAuth from "./hocs/AuthedRoutes";
 import Dashboard from "./pages/Dashboard";
 import LandingPage from "./pages/LandingPage";
 import SignInPage from "./pages/SignInPage";
@@ -28,9 +29,18 @@ function App() {
         signOutLoading={signOutLoading} />
       <main className="w-3/4 mx-auto">
         <Routes>
-          <Route path="/" element={<LandingPage authenticated={authenticated} loading={loading} />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="/sign-in" element={<SignInPage />} />
+          {/* Hidden When Signed in */}
+          <Route path="/*" element={
+            <EnsureAuth authenticated={authenticated}>
+              <Routes>
+                <Route path="/" element={<LandingPage loading={loading} />} />
+                <Route path="/sign-up" element={<SignUpPage />} />
+                <Route path="/sign-in" element={<SignInPage />} />
+              </Routes>
+            </EnsureAuth>
+          } >
+          </Route>
+          {/* Hidden When Signed out */}
           <Route path="/dashboard" element={<Dashboard authenticated={authenticated} user={user} />} />
         </Routes>
       </main>
