@@ -18,25 +18,20 @@ function App() {
     exec({ refetchQueries: [GET_AUTH_USER] })
   }
 
-  const getWelcomeMessage = () => {
-    let message = 'Welcome!'
-    if (loading) {
-      message = 'Loading...'
-    } else if (user) {
-      message = `${user.email}`
-    }
-    return message
-  }
+  const authenticated = !loading && user
 
   return (
     <BrowserRouter>
-      <Navbar authenticated={user} handleSignOut={handleSignOut} signOutLoading={signOutLoading} />
+      <Navbar
+        authenticated={authenticated}
+        handleSignOut={handleSignOut}
+        signOutLoading={signOutLoading} />
       <main className="w-3/4 mx-auto">
         <Routes>
-          <Route path="/" element={<LandingPage message={getWelcomeMessage()} />} />
+          <Route path="/" element={<LandingPage authenticated={authenticated} loading={loading} />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/sign-in" element={<SignInPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard authenticated={authenticated} user={user} />} />
         </Routes>
       </main>
     </BrowserRouter>
