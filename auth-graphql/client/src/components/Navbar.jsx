@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
-const Navbar = ({ authenticated = false, handleSignOut }) => {
+const Navbar = ({ authenticated = false, handleSignOut, signOutLoading }) => {
   return (
     <nav className="py-4 bg-gray-800 mb-12 text-white">
       <div className="w-3/4 mx-auto flex">
@@ -21,7 +21,7 @@ const Navbar = ({ authenticated = false, handleSignOut }) => {
         {authenticated && (
           <ul className="ml-auto flex gap-12">
             <button className="text-gray-400" onClick={handleSignOut}>
-              Sign Out
+              {signOutLoading ? 'Loading' : 'Sign Out'}
             </button>
           </ul>
         )}

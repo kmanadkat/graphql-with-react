@@ -12,15 +12,15 @@ import SIGN_OUT_USER from "./queries/signOut";
 function App() {
   const { data, loading } = useQuery(GET_AUTH_USER)
   const [exec, { loading: signOutLoading }] = useMutation(SIGN_OUT_USER)
+  const user = _get(data, 'user', null)
 
   const handleSignOut = () => {
-    exec()
+    exec({ refetchQueries: [GET_AUTH_USER] })
   }
 
   const getWelcomeMessage = () => {
     let message = 'Welcome!'
-    const user = _get(data, 'user', null)
-    if (loading || signOutLoading) {
+    if (loading) {
       message = 'Loading...'
     } else if (user) {
       message = `${user.email}`
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar handleSignOut={handleSignOut} />
+      <Navbar authenticated={user} handleSignOut={handleSignOut} signOutLoading={signOutLoading} />
       <main className="w-3/4 mx-auto">
         <Routes>
           <Route path="/" element={<LandingPage message={getWelcomeMessage()} />} />
