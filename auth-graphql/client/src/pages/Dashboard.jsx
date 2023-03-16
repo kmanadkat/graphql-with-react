@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Dashboard = ({ authenticated, user }) => {
   const navigate = useNavigate()
-  if (!authenticated) {
-    navigate('/')
-  }
-  return <div>{user.email}</div>
+
+  useEffect(() => {
+    if (!authenticated) {
+      navigate('/')
+    }
+  }, [navigate, authenticated])
+
+  return <div>{user ? user.email : ''}</div>
 }
 
 export default Dashboard

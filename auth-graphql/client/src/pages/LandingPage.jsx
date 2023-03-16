@@ -1,23 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const LandingPage = ({ loading, authenticated }) => {
   const navigate = useNavigate()
-  if (authenticated) {
-    navigate('/dashboard')
-  }
 
-  const getWelcomeMessage = () => {
-    let message = 'Welcome!'
-    if (loading) {
-      message = 'Loading...'
+  useEffect(() => {
+    if (authenticated) {
+      navigate('/dashboard')
     }
-    return message
-  }
+  }, [authenticated, navigate])
 
   return (
     <div>
-      <p className="text-xl font-semibold">{getWelcomeMessage()}</p>
+      <p className="text-xl font-semibold">
+        {loading ? 'Loading...' : 'Welcome!'}
+      </p>
     </div>
   )
 }
