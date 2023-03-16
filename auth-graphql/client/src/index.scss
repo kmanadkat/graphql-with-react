@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+nav ul a {
+  @apply text-gray-400 pb-1 hover:text-white transition-all;
+}
+
+nav ul a.active {
+  color: white;
+}
+
+html,
+body {
+  @apply bg-gray-400;
+}
