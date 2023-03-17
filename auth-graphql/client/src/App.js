@@ -1,36 +1,22 @@
-import { useMutation, useQuery } from "@apollo/client";
 import _get from "lodash/get";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import EnsureAuth from "./hocs/AuthedRoutes";
+import useAuth from "./hooks/useAuth";
 import Dashboard from "./pages/Dashboard";
 import LandingPage from "./pages/LandingPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import GET_AUTH_USER from "./queries/authStatus";
-import SIGN_IN_USER from "./queries/signIn";
-import SIGN_OUT_USER from "./queries/signOut";
-import SIGN_UP_USER from "./queries/signUp";
 
 function App() {
-  const { data, loading: authLoading } = useQuery(GET_AUTH_USER)
-  const [execSignUp, { loading: signUpLoading }] = useMutation(SIGN_UP_USER)
-  const [execSignIn, { loading: signInLoading }] = useMutation(SIGN_IN_USER)
-  const [execSignOut, { loading: signOutLoading }] = useMutation(SIGN_OUT_USER)
+  const {
+    authData, authLoading,
+    handleSignUp, signUpLoading,
+    handleSignIn, signInLoading,
+    handleSignOut, signOutLoading
+  } = useAuth()
 
-  const handleSignUp = (email, password) => {
-    execSignUp({ variables: { email, password }, refetchQueries: [GET_AUTH_USER] })
-  }
-
-  const handleSignIn = (email, password) => {
-    execSignIn({ variables: { email, password }, refetchQueries: [GET_AUTH_USER] })
-  }
-
-  const handleSignOut = () => {
-    execSignOut({ refetchQueries: [GET_AUTH_USER] })
-  }
-
-  const user = _get(data, 'user', null)
+  const user = _get(authData, 'user', null)
   const authenticated = !authLoading && user
 
   return (
