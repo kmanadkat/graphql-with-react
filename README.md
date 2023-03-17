@@ -1,6 +1,8 @@
 ## GraphQL With React: The Complete Developers Guide
 
-<img src="https://img-b.udemycdn.com/course/750x422/1109926_7f97_2.jpg" height="250" align="left" >
+<p align="center">
+<img src="https://img-b.udemycdn.com/course/750x422/1109926_7f97_2.jpg" height="250" >
+</p>
 
 This repository contains code from Udemy Course of Stephen Grider: [GraphQL with React: The Complete Developers Guide](https://www.udemy.com/course/graphql-with-react-course/) The course is pretty outdated but I have used latest node packages & practices throughout. I took help of official docs & ChatGPT :)
 
