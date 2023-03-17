@@ -1,5 +1,6 @@
 import _get from "lodash/get";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
 import Navbar from "./components/Navbar";
 import EnsureAuth from "./hocs/AuthedRoutes";
 import useAuth from "./hooks/useAuth";
@@ -26,6 +27,7 @@ function App() {
         handleSignOut={handleSignOut}
         signOutLoading={signOutLoading} />
       <main className="w-3/4 mx-auto">
+        <Toaster position="bottom-center" />
         <Routes>
           {/* Hidden When Signed in */}
           <Route path="/*" element={
