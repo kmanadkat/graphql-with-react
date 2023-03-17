@@ -10,22 +10,28 @@ import SignUpPage from "./pages/SignUpPage";
 import GET_AUTH_USER from "./queries/authStatus";
 import SIGN_IN_USER from "./queries/signIn";
 import SIGN_OUT_USER from "./queries/signOut";
+import SIGN_UP_USER from "./queries/signUp";
 
 function App() {
-  const { data, loading } = useQuery(GET_AUTH_USER)
+  const { data, loading: authLoading } = useQuery(GET_AUTH_USER)
+  const [execSignUp, { loading: signUpLoading }] = useMutation(SIGN_UP_USER)
   const [execSignIn, { loading: signInLoading }] = useMutation(SIGN_IN_USER)
   const [execSignOut, { loading: signOutLoading }] = useMutation(SIGN_OUT_USER)
-  const user = _get(data, 'user', null)
 
-  const handleSignOut = () => {
-    execSignOut({ refetchQueries: [GET_AUTH_USER] })
+  const handleSignUp = (email, password) => {
+    execSignUp({ variables: { email, password }, refetchQueries: [GET_AUTH_USER] })
   }
 
   const handleSignIn = (email, password) => {
     execSignIn({ variables: { email, password }, refetchQueries: [GET_AUTH_USER] })
   }
 
-  const authenticated = !loading && user
+  const handleSignOut = () => {
+    execSignOut({ refetchQueries: [GET_AUTH_USER] })
+  }
+
+  const user = _get(data, 'user', null)
+  const authenticated = !authLoading && user
 
   return (
     <BrowserRouter>
@@ -39,8 +45,8 @@ function App() {
           <Route path="/*" element={
             <EnsureAuth authenticated={authenticated}>
               <Routes>
-                <Route path="/" element={<LandingPage loading={loading} />} />
-                <Route path="/sign-up" element={<SignUpPage />} />
+                <Route path="/" element={<LandingPage loading={authLoading} />} />
+                <Route path="/sign-up" element={<SignUpPage handleSignup={handleSignUp} loading={signUpLoading} />} />
                 <Route path="/sign-in" element={<SignInPage handleSignIn={handleSignIn} loading={signInLoading} />} />
               </Routes>
             </EnsureAuth>
