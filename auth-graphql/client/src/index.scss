@@ -12,5 +12,32 @@ nav ul a.active {
 
 html,
 body {
-  @apply bg-gray-400;
+  @apply bg-gray-300;
+}
+
+.form-wrapper {
+  @apply flex flex-col gap-2 mb-6;
+
+  label {
+    @apply font-medium text-sm;
+  }
+
+  input {
+    @apply max-w-xs px-3 py-1.5 rounded border outline-none bg-gray-50 focus:bg-white focus:border-gray-700 transition-all;
+  }
+}
+
+form button.primary {
+  @apply bg-indigo-800 
+  text-white
+  px-4 py-2
+  rounded
+  text-sm
+  font-medium
+  transition-all
+  active:bg-black;
+
+  &:disabled {
+    @apply bg-gray-400;
+  }
 }
